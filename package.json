@@ -7,13 +7,16 @@
     "start": "node build/server.js",
     "build": "tsup src --out-dir build",
     "test": "vitest run",
-    "test:watch": "vitest"
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage",
+    "test:coverage:watch": "vitest --coverage"
   },
   "license": "MIT",
   "devDependencies": {
     "@rocketseat/eslint-config": "1.2.0",
     "@types/bcryptjs": "2.4.2",
     "@types/node": "^20.2.3",
+    "@vitest/coverage-c8": "0.31.2",
     "eslint": "8.41.0",
     "prisma": "4.14.1",
     "tsup": "^6.7.0",
