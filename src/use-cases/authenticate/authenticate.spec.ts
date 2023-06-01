@@ -2,7 +2,7 @@ import { expect, describe, it, beforeEach } from 'vitest'
 import { InMemoryUsersRepository } from '@/repositories/in-memory-user-repository'
 import { AuthenticateUseCase } from './authenticate'
 import { hash } from 'bcryptjs'
-import { InvalidCredentialsError } from './errors/invalid-credentials-error'
+import { InvalidCredentialsError } from '../errors/invalid-credentials-error'
 
 const userToTest = {
   name: 'John Doe',
