@@ -1,4 +1,4 @@
-import { expect, describe, it } from 'vitest'
+import { expect, describe, it, beforeEach } from 'vitest'
 import { compare } from 'bcryptjs'
 import { RegisterUseCase } from './register'
 import { InMemoryUsersRepository } from '@/repositories/in-memory-user-repository'
@@ -9,21 +9,24 @@ const userToTest = {
   email: 'johndoe@getMaxListeners.com',
   password: '123',
 }
-describe('Register Use Case', () => {
-  it('should be able to register', async () => {
-    const inMemoryUsersRepository = new InMemoryUsersRepository()
-    const registerUseCase = new RegisterUseCase(inMemoryUsersRepository)
 
-    const { user } = await registerUseCase.execute(userToTest)
+let inMemoryUsersRepository: InMemoryUsersRepository
+let sut: RegisterUseCase
+
+describe('Register Use Case', () => {
+  beforeEach(() => {
+    inMemoryUsersRepository = new InMemoryUsersRepository()
+    sut = new RegisterUseCase(inMemoryUsersRepository)
+  })
+
+  it('should be able to register', async () => {
+    const { user } = await sut.execute(userToTest)
 
     expect(user.id).toEqual(expect.any(String))
   })
 
   it('should hash user password upon registration', async () => {
-    const inMemoryUsersRepository = new InMemoryUsersRepository()
-    const registerUseCase = new RegisterUseCase(inMemoryUsersRepository)
-
-    const { user } = await registerUseCase.execute(userToTest)
+    const { user } = await sut.execute(userToTest)
 
     const isPasswordCorrectlyHashed = await compare(
       userToTest.password,
@@ -34,13 +37,10 @@ describe('Register Use Case', () => {
   })
 
   it('should not register user with same email twice', async () => {
-    const inMemoryUsersRepository = new InMemoryUsersRepository()
-    const registerUseCase = new RegisterUseCase(inMemoryUsersRepository)
+    await sut.execute(userToTest)
 
-    await registerUseCase.execute(userToTest)
-
-    await expect(() =>
-      registerUseCase.execute(userToTest),
-    ).rejects.toBeInstanceOf(UserAlreadyExistsError)
+    await expect(() => sut.execute(userToTest)).rejects.toBeInstanceOf(
+      UserAlreadyExistsError,
+    )
   })
 })
