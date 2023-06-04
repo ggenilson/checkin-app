@@ -16,8 +16,8 @@ const gymToTest = {
   name: 'Javascript Gym',
   description: '',
   phone: '',
-  latitude: new Decimal(0),
-  longitude: new Decimal(0),
+  latitude: new Decimal(41.1696129),
+  longitude: new Decimal(-8.6050843),
 }
 
 let checkInsRepository: InMemoryCheckInsRepository
@@ -63,5 +63,21 @@ describe('Check-in Use Case', () => {
     const { checkIn } = await sut.execute(checkInToTest)
 
     expect(checkIn.id).toEqual(expect.any(String))
+  })
+
+  it('should not be able to check in on distant gym', async () => {
+    await gymsRepository.create({
+      ...gymToTest,
+      id: 'gym-02',
+      latitude: new Decimal(41.1709051),
+      longitude: new Decimal(-8.5932397),
+    })
+
+    await expect(() =>
+      sut.execute({
+        ...checkInToTest,
+        gymId: 'gym-02',
+      }),
+    ).rejects.toBeInstanceOf(Error)
   })
 })
