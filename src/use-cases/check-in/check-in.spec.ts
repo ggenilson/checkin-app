@@ -1,19 +1,36 @@
 import { expect, describe, it, beforeEach, afterEach, vi } from 'vitest'
 import { InMemoryCheckInsRepository } from '@/repositories/check-ins/in-memory-check-in-repository'
 import { CheckInUseCase } from './check-in'
+import { InMemoryGymsRepository } from '@/repositories/gyms/in-memory-gyms-repository'
+import { Decimal } from '@prisma/client/runtime/library'
 
 const checkInToTest = {
   gymId: 'gym-01',
   userId: 'user-01',
+  userLatitude: 41.1696129,
+  userLongitude: -8.6050843,
+}
+
+const gymToTest = {
+  id: 'gym-01',
+  name: 'Javascript Gym',
+  description: '',
+  phone: '',
+  latitude: new Decimal(0),
+  longitude: new Decimal(0),
 }
 
 let checkInsRepository: InMemoryCheckInsRepository
+let gymsRepository: InMemoryGymsRepository
 let sut: CheckInUseCase
 
 describe('Check-in Use Case', () => {
-  beforeEach(() => {
+  beforeEach(async () => {
     checkInsRepository = new InMemoryCheckInsRepository()
-    sut = new CheckInUseCase(checkInsRepository)
+    gymsRepository = new InMemoryGymsRepository()
+    sut = new CheckInUseCase(checkInsRepository, gymsRepository)
+
+    await gymsRepository.create(gymToTest)
 
     vi.useFakeTimers()
   })

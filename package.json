@@ -30,6 +30,7 @@
   "dependencies": {
     "@prisma/client": "4.14.1",
     "bcryptjs": "2.4.3",
+    "dayjs": "1.11.8",
     "dotenv": "16.0.3",
     "fastify": "^4.17.0",
     "zod": "3.21.4"
