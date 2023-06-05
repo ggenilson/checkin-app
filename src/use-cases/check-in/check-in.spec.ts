@@ -3,7 +3,7 @@ import { InMemoryCheckInsRepository } from '@/repositories/check-ins/in-memory-c
 import { CheckInUseCase } from './check-in'
 import { InMemoryGymsRepository } from '@/repositories/gyms/in-memory-gyms-repository'
 import { MaxDistanceError } from '../errors/max-distance-error'
-import { MaxNumberOfCheckInsError } from '../errors/max-number-of-check-ins-erros'
+import { MaxNumberOfCheckInsError } from '../errors/max-number-of-check-ins-error'
 
 const checkInToTest = {
   gymId: 'gym-01',
