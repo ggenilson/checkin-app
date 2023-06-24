@@ -33,8 +33,6 @@ describe('Fetch User Check-in History Use Case', () => {
       page: 1,
     })
 
-    console.log(gyms)
-
     expect(gyms).toHaveLength(1)
     expect(gyms).toEqual([expect.objectContaining({ name: 'Javascript Gym' })])
   })
