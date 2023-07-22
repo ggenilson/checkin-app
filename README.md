@@ -22,7 +22,7 @@ GymPass style app.
 - [x] O usuário não pode fazer check-in se não estiver perto (100m) da academia;
 - [x] O check-in só pode ser validado até 20 minutos após ser criado;
 - [ ] O check-in só pode ser validado por administradores;
-- [ ] A academia só pode ser cadastrad por administradores;
+- [ ] A academia só pode ser cadastra por administradores;
 
 ## RNs (Regras de negócio)
 
