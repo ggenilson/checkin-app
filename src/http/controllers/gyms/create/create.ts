@@ -15,9 +15,9 @@ export async function create(request: FastifyRequest, reply: FastifyReply) {
     request.body,
   )
 
-  const registerUseCase = makeCreateGymUseCase()
+  const useCase = makeCreateGymUseCase()
 
-  await registerUseCase.execute({
+  await useCase.execute({
     name,
     description,
     phone,
