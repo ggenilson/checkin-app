@@ -15,7 +15,7 @@ jobs:
           node-version: 18
           cache: 'yarn'
       
-      - run: npm ci 
+      - run: yarn ci 
 
       - run: yarn test
       
