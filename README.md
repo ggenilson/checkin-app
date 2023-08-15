@@ -24,7 +24,7 @@ GymPass style app.
 - [ ] O check-in só pode ser validado por administradores;
 - [ ] A academia só pode ser cadastra por administradores;
 
-## RNs (Regras de negócio)
+## RNs (Requisitos não-functionais)
 
 - [x] A senha do usuário precisa estar criptografada;
 - [x] Os dados da aplicação precisam estar persistidos em um banco de dados PostgresSQL;
